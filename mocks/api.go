@@ -196,6 +196,36 @@ func (_m *API) BanSenderChat(chat *telebot.Chat, sender telebot.Recipient) error
 	return r0
 }
 
+// BusinessConnection provides a mock function with given fields: id
+func (_m *API) BusinessConnection(id string) (*telebot.BusinessConnection, error) {
+	ret := _m.Called(id)
+
+	if len(ret) == 0 {
+		panic("no return value specified for BusinessConnection")
+	}
+
+	var r0 *telebot.BusinessConnection
+	var r1 error
+	if rf, ok := ret.Get(0).(func(string) (*telebot.BusinessConnection, error)); ok {
+		return rf(id)
+	}
+	if rf, ok := ret.Get(0).(func(string) *telebot.BusinessConnection); ok {
+		r0 = rf(id)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telebot.BusinessConnection)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(string) error); ok {
+		r1 = rf(id)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // ChatByID provides a mock function with given fields: id
 func (_m *API) ChatByID(id int64) (*telebot.Chat, error) {
 	ret := _m.Called(id)
@@ -1517,24 +1547,35 @@ func (_m *API) Raw(method string, payload interface{}) ([]byte, error) {
 	return r0, r1
 }
 
-// React provides a mock function with given fields: to, msg, opts
-func (_m *API) React(to telebot.Recipient, msg telebot.Editable, opts ...telebot.ReactionOptions) error {
-	_va := make([]interface{}, len(opts))
-	for _i := range opts {
-		_va[_i] = opts[_i]
-	}
-	var _ca []interface{}
-	_ca = append(_ca, to, msg)
-	_ca = append(_ca, _va...)
-	ret := _m.Called(_ca...)
+// React provides a mock function with given fields: to, msg, r
+func (_m *API) React(to telebot.Recipient, msg telebot.Editable, r telebot.Reactions) error {
+	ret := _m.Called(to, msg, r)
 
 	if len(ret) == 0 {
 		panic("no return value specified for React")
 	}
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(telebot.Recipient, telebot.Editable, ...telebot.ReactionOptions) error); ok {
-		r0 = rf(to, msg, opts...)
+	if rf, ok := ret.Get(0).(func(telebot.Recipient, telebot.Editable, telebot.Reactions) error); ok {
+		r0 = rf(to, msg, r)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// RefundStars provides a mock function with given fields: to, chargeID
+func (_m *API) RefundStars(to telebot.Recipient, chargeID string) error {
+	ret := _m.Called(to, chargeID)
+
+	if len(ret) == 0 {
+		panic("no return value specified for RefundStars")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(telebot.Recipient, string) error); ok {
+		r0 = rf(to, chargeID)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -1600,6 +1641,34 @@ func (_m *API) ReopenTopic(chat *telebot.Chat, topic *telebot.Topic) error {
 	}
 
 	return r0
+}
+
+// ReplaceStickerInSet provides a mock function with given fields: of, stickerSet, oldSticker, sticker
+func (_m *API) ReplaceStickerInSet(of telebot.Recipient, stickerSet string, oldSticker string, sticker telebot.InputSticker) (bool, error) {
+	ret := _m.Called(of, stickerSet, oldSticker, sticker)
+
+	if len(ret) == 0 {
+		panic("no return value specified for ReplaceStickerInSet")
+	}
+
+	var r0 bool
+	var r1 error
+	if rf, ok := ret.Get(0).(func(telebot.Recipient, string, string, telebot.InputSticker) (bool, error)); ok {
+		return rf(of, stickerSet, oldSticker, sticker)
+	}
+	if rf, ok := ret.Get(0).(func(telebot.Recipient, string, string, telebot.InputSticker) bool); ok {
+		r0 = rf(of, stickerSet, oldSticker, sticker)
+	} else {
+		r0 = ret.Get(0).(bool)
+	}
+
+	if rf, ok := ret.Get(1).(func(telebot.Recipient, string, string, telebot.InputSticker) error); ok {
+		r1 = rf(of, stickerSet, oldSticker, sticker)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // Reply provides a mock function with given fields: to, what, opts
@@ -1767,6 +1836,39 @@ func (_m *API) SendAlbum(to telebot.Recipient, a telebot.Album, opts ...interfac
 
 	if rf, ok := ret.Get(1).(func(telebot.Recipient, telebot.Album, ...interface{}) error); ok {
 		r1 = rf(to, a, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SendPaid provides a mock function with given fields: to, stars, a, opts
+func (_m *API) SendPaid(to telebot.Recipient, stars int, a telebot.PaidAlbum, opts ...interface{}) (*telebot.Message, error) {
+	var _ca []interface{}
+	_ca = append(_ca, to, stars, a)
+	_ca = append(_ca, opts...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SendPaid")
+	}
+
+	var r0 *telebot.Message
+	var r1 error
+	if rf, ok := ret.Get(0).(func(telebot.Recipient, int, telebot.PaidAlbum, ...interface{}) (*telebot.Message, error)); ok {
+		return rf(to, stars, a, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(telebot.Recipient, int, telebot.PaidAlbum, ...interface{}) *telebot.Message); ok {
+		r0 = rf(to, stars, a, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telebot.Message)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(telebot.Recipient, int, telebot.PaidAlbum, ...interface{}) error); ok {
+		r1 = rf(to, stars, a, opts...)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -2167,6 +2269,36 @@ func (_m *API) Ship(query *telebot.ShippingQuery, what ...interface{}) error {
 	}
 
 	return r0
+}
+
+// StarTransactions provides a mock function with given fields: offset, limit
+func (_m *API) StarTransactions(offset int, limit int) ([]telebot.StarTransaction, error) {
+	ret := _m.Called(offset, limit)
+
+	if len(ret) == 0 {
+		panic("no return value specified for StarTransactions")
+	}
+
+	var r0 []telebot.StarTransaction
+	var r1 error
+	if rf, ok := ret.Get(0).(func(int, int) ([]telebot.StarTransaction, error)); ok {
+		return rf(offset, limit)
+	}
+	if rf, ok := ret.Get(0).(func(int, int) []telebot.StarTransaction); ok {
+		r0 = rf(offset, limit)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]telebot.StarTransaction)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(int, int) error); ok {
+		r1 = rf(offset, limit)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // StickerSet provides a mock function with given fields: name

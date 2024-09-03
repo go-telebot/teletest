@@ -2,12 +2,10 @@ module github.com/go-telebot/teletest
 
 go 1.21
 
-replace gopkg.in/telebot.v3 => /Users/dem/go/src/github.com/tucnak/telebot
-
 require (
 	github.com/smartystreets/goconvey v1.8.1
 	github.com/stretchr/testify v1.9.0
-	gopkg.in/telebot.v3 v3.0.0-00010101000000-000000000000
+	gopkg.in/telebot.v3 v3.4.1-beta
 )
 
 require (
